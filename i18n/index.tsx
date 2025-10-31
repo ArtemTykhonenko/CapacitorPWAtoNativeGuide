@@ -1,9 +1,10 @@
 import React, { createContext, useContext, useState, useMemo, ReactNode } from 'react';
-import { translations, Step, StepContent } from './locales';
+import { translations } from './locales';
+import type { Step, StepContent } from './locales';
 
 export type Language = 'en' | 'ru' | 'ua';
 
-export { Step, StepContent };
+export type { Step, StepContent };
 
 type Translations = typeof translations.ru;
 

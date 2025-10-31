@@ -6,7 +6,8 @@ import LandingPage from './components/LandingPage';
 import SuccessScreen from './components/SuccessScreen';
 import Footer from './components/Footer';
 import LanguageSwitcher from './components/LanguageSwitcher';
-import { useTranslation, Step as StepType } from './i18n';
+import { useTranslation } from './i18n';
+import type { Step as StepType } from './i18n';
 
 type View = 'landing' | 'selector' | 'guide' | 'success';
 
