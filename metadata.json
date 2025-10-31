@@ -1,0 +1,5 @@
+{
+  "name": "Capacitor PWA to Native Guide",
+  "description": "An interactive, step-by-step guide to turning a PWA into a native Android or iOS application using Capacitor, directly from your VS Code terminal.",
+  "requestFramePermissions": []
+}
