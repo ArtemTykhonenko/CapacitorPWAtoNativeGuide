@@ -1,5 +1,5 @@
-
 import React from 'react';
+import { useTranslation } from '../i18n';
 
 interface ProgressBarProps {
     current: number;
@@ -7,13 +7,14 @@ interface ProgressBarProps {
 }
 
 const ProgressBar: React.FC<ProgressBarProps> = ({ current, total }) => {
+    const { t } = useTranslation();
     const percentage = (current / total) * 100;
 
     return (
         <div>
             <div className="flex justify-between items-center mb-1">
-                <span className="text-sm font-medium text-slate-400">Прогресс</span>
-                <span className="text-sm font-medium text-slate-400">{current} из {total}</span>
+                <span className="text-sm font-medium text-slate-400">{t('progressBar.title')}</span>
+                <span className="text-sm font-medium text-slate-400">{t('progressBar.of', { current, total })}</span>
             </div>
             <div className="w-full bg-slate-700 rounded-full h-2.5">
                 <div 

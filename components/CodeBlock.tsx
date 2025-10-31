@@ -1,6 +1,6 @@
-
 import React, { useState } from 'react';
 import { ClipboardIcon, CheckIcon } from './icons';
+import { useTranslation } from '../i18n';
 
 interface CodeBlockProps {
     code: string;
@@ -8,6 +8,7 @@ interface CodeBlockProps {
 }
 
 const CodeBlock: React.FC<CodeBlockProps> = ({ code, language }) => {
+    const { t } = useTranslation();
     const [isCopied, setIsCopied] = useState(false);
 
     const handleCopy = async () => {
@@ -31,12 +32,12 @@ const CodeBlock: React.FC<CodeBlockProps> = ({ code, language }) => {
                     {isCopied ? (
                         <>
                             <CheckIcon className="h-4 w-4 mr-1 text-green-400" />
-                            <span>Скопировано!</span>
+                            <span>{t('common.copied')}</span>
                         </>
                     ) : (
                         <>
                            <ClipboardIcon className="h-4 w-4 mr-1" />
-                           <span>Копировать</span>
+                           <span>{t('common.copy')}</span>
                         </>
                     )}
                 </button>

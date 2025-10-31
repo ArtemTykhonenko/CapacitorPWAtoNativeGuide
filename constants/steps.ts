@@ -12,9 +12,9 @@ export interface Step {
 
 export const STEPS: Step[] = [
     {
-        title: "Шаг 0: Установка зависимостей",
+        title: "Шаг 1: Подготовка проекта",
         content: [
-            { type: 'paragraph', content: 'Перед началом убедитесь, что все зависимости вашего проекта установлены. Выполните эту команду в корневой папке вашего проекта.' },
+            { type: 'paragraph', content: 'Это руководство предполагает, что у вас есть готовый веб-проект (например, на React, Vue, Vite). Убедитесь, что все зависимости установлены и проект готов к сборке.' },
             { type: 'code', content: 'npm install', language: 'bash' },
         ]
     },
@@ -49,35 +49,43 @@ export const STEPS: Step[] = [
         ]
     },
     {
-        title: "Шаг 1: Сборка веб-приложения",
+        title: "Шаг 2: Сборка веб-приложения",
         content: [
             { type: 'paragraph', content: 'Соберите ваше веб-приложение в статичные файлы. Эта команда создаст папку `dist`.' },
             { type: 'code', content: 'npm run build', language: 'bash' },
         ]
     },
     {
-        title: "Шаг 2: Установка Capacitor Core",
+        title: "Шаг 3: Установка Capacitor Core",
         content: [
             { type: 'paragraph', content: 'Добавьте ядро Capacitor в ваш проект.' },
             { type: 'code', content: 'npm install @capacitor/core', language: 'bash' },
         ]
     },
     {
-        title: "Шаг 3: Установка Capacitor CLI",
+        title: "Шаг 4: Установка Capacitor CLI",
         content: [
             { type: 'paragraph', content: 'CLI (Command Line Interface) — это инструмент для управления проектами Capacitor.' },
             { type: 'code', content: 'npm install @capacitor/cli --save-dev', language: 'bash' },
         ]
     },
     {
-        title: "Шаг 4: Инициализация Capacitor",
+        title: "Шаг 5: Инициализация Capacitor",
         content: [
-            { type: 'paragraph', content: 'Эта команда создаст конфигурационный файл `capacitor.config.ts`. Убедитесь, что в нем `webDir` указывает на `"dist"`.' },
-            { type: 'code', content: 'npx cap init "MyAppName" "com.company.myapp"', language: 'bash' },
+            { type: 'paragraph', content: 'Эта команда создаст конфигурационный файл `capacitor.config.ts` и сразу укажет в нем папку со сборкой `dist`.' },
+            { type: 'code', content: 'npx cap init "YourAppName" "com.yourapp" --web-dir "dist"', language: 'bash' },
         ]
     },
     {
-        title: "Шаг 5: Добавление платформы Android",
+        title: "Шаг 6: Установка Android-платформы",
+        platform: 'android',
+        content: [
+            { type: 'paragraph', content: 'Установите нативный пакет для Android.' },
+            { type: 'code', content: 'npm install @capacitor/android', language: 'bash' },
+        ]
+    },
+    {
+        title: "Шаг 7: Добавление платформы Android",
         platform: 'android',
         content: [
             { type: 'paragraph', content: 'Создайте нативный проект Android в вашем приложении.' },
@@ -85,7 +93,7 @@ export const STEPS: Step[] = [
         ]
     },
     {
-        title: "Шаг 5: Добавление платформы iOS",
+        title: "Шаг 6: Добавление платформы iOS",
         platform: 'ios',
         content: [
             { type: 'paragraph', content: 'Создайте нативный проект iOS в вашем приложении.' },
@@ -93,38 +101,23 @@ export const STEPS: Step[] = [
         ]
     },
     {
-        title: "Шаг 6: Синхронизация веб-кода",
+        title: "Шаг 8: Синхронизация веб-кода",
+        platform: 'android',
         content: [
-            { type: 'paragraph', content: 'Скопируйте вашу веб-сборку (`dist`) в нативные проекты. Эту команду нужно выполнять после каждого `npm run build`.' },
+            { type: 'paragraph', content: 'Скопируйте вашу веб-сборку (`dist`) в нативный проект. Эту команду нужно выполнять после каждого `npm run build`.' },
             { type: 'code', content: 'npx cap sync', language: 'bash' },
         ]
     },
-     {
-        title: "Шаг 7 (Вариант А): Запуск из VS Code",
-        platform: 'android',
-        content: [
-            { type: 'paragraph', content: '<b>Сначала подготовьте эмулятор.</b> Откройте Android Studio, перейдите в <b>Tools > Device Manager</b> и запустите ваш виртуальный девайс. Либо подключите реальное устройство с включенной отладкой по USB.' },
-            { type: 'paragraph', content: 'Теперь выполните команду для запуска. Флаг `-l --external` включает Live Reload для быстрой разработки.' },
-            { type: 'code', content: 'npx cap run android -l --external', language: 'bash' },
-        ]
-    },
     {
-        title: "Шаг 7 (Вариант А): Запуск из VS Code",
+        title: "Шаг 7: Синхронизация веб-кода",
         platform: 'ios',
         content: [
-            { type: 'paragraph', content: '<b>Убедитесь, что симулятор запущен.</b> Вы можете запустить его вручную из Xcode или команда ниже сделает это за вас.' },
-            { type: 'paragraph', content: 'Теперь выполните команду для запуска. Флаг `-l --external` включает Live Reload для быстрой разработки.' },
-            { type: 'code', content: 'npx cap run ios -l --external', language: 'bash' },
+            { type: 'paragraph', content: 'Скопируйте вашу веб-сборку (`dist`) в нативный проект. Эту команду нужно выполнять после каждого `npm run build`.' },
+            { type: 'code', content: 'npx cap sync', language: 'bash' },
         ]
     },
     {
-        title: "Шаг 7 (Вариант Б): Запуск из IDE",
-        content: [
-            { type: 'paragraph', content: 'Вы также можете запускать и отлаживать приложение напрямую из нативной IDE. Это дает больше контроля. Сначала откройте проект.' },
-        ]
-    },
-    {
-        title: "Запуск из Android Studio",
+        title: "Шаг 9: Запуск из Android Studio",
         platform: 'android',
         content: [
             { type: 'paragraph', content: 'Откройте нативный проект в Android Studio:' },
@@ -133,62 +126,36 @@ export const STEPS: Step[] = [
         ]
     },
     {
-        title: "Запуск из Xcode",
+        title: "Шаг 8: Запуск из Xcode",
         platform: 'ios',
         content: [
             { type: 'paragraph', content: 'Откройте нативный проект в Xcode:' },
             { type: 'code', content: 'npx cap open ios', language: 'bash' },
             { type: 'paragraph', content: "Вверху слева выберите ваш симулятор или подключенное устройство и нажмите <b>кнопку 'Run' (▶)</b>." },
-
         ]
     },
     {
-        title: "Шаг 8: Сборка для публикации",
-        content: [
-            { type: 'paragraph', content: 'Когда приложение готово, его нужно собрать для загрузки в магазин. Убедитесь, что вы сделали финальную сборку и синхронизацию веб-кода.' },
-             { type: 'code', content: 'npm run build\nnpx cap sync', language: 'bash' },
-        ]
-    },
-    {
-        title: "Публикация (Android): Открытие проекта",
+        title: "Шаг 10: Сборка APK-файла для публикации",
         platform: 'android',
         content: [
-            { type: 'paragraph', content: 'Откройте нативный проект в Android Studio.' },
-            { type: 'code', content: 'npx cap open android', language: 'bash' },
+            { type: 'paragraph', content: 'Когда приложение готово, можно собрать подписанный APK-файл для установки на устройства или загрузки в Google Play.' },
+            { type: 'paragraph', content: '1. В верхнем меню Android Studio выберите <b>Build &rarr; Generate Signed Bundle / APK...</b>.' },
+            { type: 'paragraph', content: '2. Выберите <b>APK</b> и нажмите <b>Next</b>.' },
+            { type: 'paragraph', content: '3. На следующем экране, если у вас еще нет ключа подписи, нажмите <b>Create new...</b>.' },
+            { type: 'paragraph', content: '4. Заполните форму для создания ключа: укажите путь для сохранения файла ключа (key store path), придумайте пароли для хранилища и самого ключа, укажите псевдоним ключа (alias) и заполните информацию о себе. <b>Надежно сохраните файл ключа и пароли!</b> Они понадобятся для всех будущих обновлений приложения.' },
+            { type: 'paragraph', content: '5. После создания (или выбора существующего) ключа, введите пароли, выберите `release` в качестве Build Variant и нажмите <b>Finish</b>.' },
+            { type: 'paragraph', content: 'Готовый APK-файл будет находиться в папке `your-project/android/app/release/app-release.apk`.' },
         ]
     },
     {
-        title: "Публикация (Android): Генерация App Bundle",
-        platform: 'android',
-        content: [
-            { type: 'paragraph', content: 'В меню Android Studio выберите <b>Build > Generate Signed Bundle / APK...</b>' },
-            { type: 'paragraph', content: 'Выберите <b>Android App Bundle</b> для загрузки в Google Play и нажмите <b>Next</b>.' },
-        ]
-    },
-    {
-        title: "Публикация (Android): Создание ключа подписи",
-        platform: 'android',
-        content: [
-            { type: 'paragraph', content: 'Нажмите <b>Create new...</b>. Этот ключ — ваша цифровая подпись. <b>Обязательно сохраните файл ключа (.jks) и пароли в надежном месте!</b> Без них вы не сможете публиковать обновления.' },
-            { type: 'paragraph', content: 'Заполните форму: укажите путь сохранения файла, задайте пароли и заполните информацию о себе. Нажмите <b>OK</b>.' },
-        ]
-    },
-    {
-        title: "Публикация (Android): Завершение сборки",
-        platform: 'android',
-        content: [
-            { type: 'paragraph', content: 'Вы вернетесь в предыдущее окно. Убедитесь, что ваш новый ключ выбран, введите пароли и нажмите <b>Next</b>.' },
-            { type: 'paragraph', content: 'Выберите вариант сборки <b>release</b> и нажмите <b>Finish</b>. Android Studio создаст подписанный `.aab` файл в папке `android/app/release/`. Именно его нужно загружать в Google Play Console.' },
-        ]
-    },
-    {
-        title: "Публикация (iOS): Настройка и архивация",
+        title: "Шаг 9: Архивирование и публикация",
         platform: 'ios',
         content: [
-            { type: 'paragraph', content: 'Откройте проект в Xcode:' },
-            { type: 'code', content: 'npx cap open ios', language: 'bash' },
-            { type: 'paragraph', content: 'В Xcode перейдите в раздел <b>Signing & Capabilities</b> и выберите вашу команду разработчика (требуется аккаунт Apple Developer).' },
-            { type: 'paragraph', content: 'Затем в верхнем меню выберите <b>Product > Archive</b>. После завершения архивации откроется окно Organizer, откуда вы сможете загрузить сборку в App Store Connect.' },
+            { type: 'paragraph', content: 'Для публикации в App Store необходимо создать архив приложения.' },
+            { type: 'paragraph', content: '1. В Xcode убедитесь, что в качестве цели выбрано <b>Any iOS Device (arm64)</b>.' },
+            { type: 'paragraph', content: '2. В верхнем меню выберите <b>Product &rarr; Archive</b>.' },
+            { type: 'paragraph', content: '3. После завершения архивации откроется окно Organizer. Здесь вы можете проверить архив и нажать <b>Distribute App</b>, чтобы загрузить его в App Store Connect.' },
+            { type: 'paragraph', content: 'Вам потребуется активная учетная запись Apple Developer.' },
         ]
     }
 ];
