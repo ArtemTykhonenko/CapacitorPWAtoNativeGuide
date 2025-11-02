@@ -46,13 +46,6 @@ const commonSteps = {
             { type: 'code', content: 'npx cap init "YourAppName" "com.yourapp" --web-dir "dist"', language: 'bash' },
         ]
     }),
-    syncWebCode: (title: string, p1: string) => ({
-        title,
-        content: [
-            { type: 'paragraph', content: p1 },
-            { type: 'code', content: 'npx cap sync', language: 'bash' },
-        ]
-    }),
     android: {
         installStudio: (title: string, p1: string) => ({
             title,
@@ -73,6 +66,14 @@ const commonSteps = {
             content: [
                 { type: 'paragraph', content: p1 },
                 { type: 'code', content: 'npx cap add android', language: 'bash' },
+            ]
+        }),
+        syncWebCode: (title: string, p1: string) => ({
+            title,
+            platform: 'android',
+            content: [
+                { type: 'paragraph', content: p1 },
+                { type: 'code', content: 'npx cap sync', language: 'bash' },
             ]
         }),
         openStudio: (title: string, p1: string, p2: string) => ({
@@ -118,6 +119,14 @@ const commonSteps = {
             content: [
                 { type: 'paragraph', content: p1 },
                 { type: 'code', content: 'npx cap add ios', language: 'bash' },
+            ]
+        }),
+        syncWebCode: (title: string, p1: string) => ({
+            title,
+            platform: 'ios',
+            content: [
+                { type: 'paragraph', content: p1 },
+                { type: 'code', content: 'npx cap sync', language: 'bash' },
             ]
         }),
         openXcode: (title: string, p1: string, p2: string) => ({
@@ -172,23 +181,23 @@ const en = {
         copied: "Copied!"
     },
     steps: [
-        commonSteps.prepareProject("Step 1: Prepare Your Project", "This guide assumes you have a ready web project (e.g., on React, Vue, Vite). Ensure all dependencies are installed and the project is ready to build."),
+        commonSteps.prepareProject("Prepare Your Project", "This guide assumes you have a ready web project (e.g., on React, Vue, Vite). Ensure all dependencies are installed and the project is ready to build."),
         commonSteps.android.installStudio("Preparation: Install Android Studio", 'You will need <a href="https://developer.android.com/studio" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300">Android Studio</a>. It will install all the necessary SDKs, command-line tools, and the virtual device manager (emulators).'),
         commonSteps.ios.installXcode("Preparation: Install Xcode", 'Install <a href="https://developer.apple.com/xcode/" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300">Xcode</a> from the App Store. This is the primary tool for iOS development.'),
         commonSteps.ios.installCliTools("Preparation: Install Xcode Command Line Tools", "Now install the Xcode command line tools. Run in your terminal:"),
         commonSteps.ios.installCocoaPods("Preparation: Install CocoaPods", "CocoaPods is a dependency manager for iOS projects. Install it with the command:"),
-        commonSteps.buildApp("Step 2: Build Your Web Application", "Build your web application into static files. This command will create a `dist` folder."),
-        commonSteps.installCore("Step 3: Install Capacitor Core", "Add the Capacitor core to your project."),
-        commonSteps.installCli("Step 4: Install Capacitor CLI", "The CLI (Command Line Interface) is a tool for managing Capacitor projects."),
-        commonSteps.initCapacitor("Step 5: Initialize Capacitor", "This command creates a `capacitor.config.ts` configuration file and specifies the `dist` build folder within it."),
-        commonSteps.android.installPlatform("Step 6: Install Android Platform", "Install the native package for Android."),
-        commonSteps.android.addPlatform("Step 7: Add Android Platform", "Create a native Android project in your application."),
-        commonSteps.ios.addPlatform("Step 6: Add iOS Platform", "Create a native iOS project in your application."),
-        commonSteps.syncWebCode("Step 8 (Android): Sync Web Code", "Copy your web build (`dist`) to the native project. This command needs to be run after every `npm run build`."),
-        commonSteps.syncWebCode("Step 7 (iOS): Sync Web Code", "Copy your web build (`dist`) to the native project. This command needs to be run after every `npm run build`."),
-        commonSteps.android.openStudio("Step 9: Run from Android Studio", "Open the native project in Android Studio:", "Wait for the project to sync. Then, select your emulator or device from the top toolbar and click the <b>green 'Run' button (▶)</b>."),
-        commonSteps.ios.openXcode("Step 8: Run from Xcode", "Open the native project in Xcode:", "At the top left, select your simulator or connected device and click the <b>'Run' button (▶)</b>."),
-        commonSteps.android.buildApk("Step 10: Build an APK for Publishing",
+        commonSteps.buildApp("Build Your Web Application", "Build your web application into static files. This command will create a `dist` folder."),
+        commonSteps.installCore("Install Capacitor Core", "Add the Capacitor core to your project."),
+        commonSteps.installCli("Install Capacitor CLI", "The CLI (Command Line Interface) is a tool for managing Capacitor projects."),
+        commonSteps.initCapacitor("Initialize Capacitor", "This command creates a `capacitor.config.ts` configuration file and specifies the `dist` build folder within it."),
+        commonSteps.android.installPlatform("Install Android Platform", "Install the native package for Android."),
+        commonSteps.android.addPlatform("Add Android Platform", "Create a native Android project in your application."),
+        commonSteps.ios.addPlatform("Add iOS Platform", "Create a native iOS project in your application."),
+        commonSteps.android.syncWebCode("Sync Web Code", "Copy your web build (`dist`) to the native project. This command needs to be run after every `npm run build`."),
+        commonSteps.ios.syncWebCode("Sync Web Code", "Copy your web build (`dist`) to the native project. This command needs to be run after every `npm run build`."),
+        commonSteps.android.openStudio("Run from Android Studio", "Open the native project in Android Studio:", "Wait for the project to sync. Then, select your emulator or device from the top toolbar and click the <b>green 'Run' button (▶)</b>."),
+        commonSteps.ios.openXcode("Run from Xcode", "Open the native project in Xcode:", "At the top left, select your simulator or connected device and click the <b>'Run' button (▶)</b>."),
+        commonSteps.android.buildApk("Build an APK for Publishing",
             'When the app is ready, you can build a signed APK file for installation on devices or for uploading to Google Play.',
             '1. In the top menu of Android Studio, select <b>Build &rarr; Generate Signed Bundle / APK...</b>.',
             '2. Select <b>APK</b> and click <b>Next</b>.',
@@ -197,7 +206,7 @@ const en = {
             '5. After creating (or selecting an existing) key, enter the passwords, select `release` as the Build Variant, and click <b>Finish</b>.',
             'The finished APK file will be located in the `your-project/android/app/release/app-release.apk` folder.'
         ),
-        commonSteps.ios.archiveApp("Step 9: Archive and Publish",
+        commonSteps.ios.archiveApp("Archive and Publish",
             'To publish to the App Store, you need to create an application archive.',
             '1. In Xcode, ensure that <b>Any iOS Device (arm64)</b> is selected as the target.',
             '2. In the top menu, select <b>Product &rarr; Archive</b>.',
@@ -242,23 +251,23 @@ const ru = {
         copied: "Скопировано!"
     },
     steps: [
-        commonSteps.prepareProject("Шаг 1: Подготовка проекта", "Это руководство предполагает, что у вас есть готовый веб-проект (например, на React, Vue, Vite). Убедитесь, что все зависимости установлены и проект готов к сборке."),
+        commonSteps.prepareProject("Подготовка проекта", "Это руководство предполагает, что у вас есть готовый веб-проект (например, на React, Vue, Vite). Убедитесь, что все зависимости установлены и проект готов к сборке."),
         commonSteps.android.installStudio("Подготовка: Установка Android Studio", 'Вам понадобится <a href="https://developer.android.com/studio" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300">Android Studio</a>. Она установит все необходимые SDK, инструменты командной строки и менеджер виртуальных устройств (эмуляторов).'),
         commonSteps.ios.installXcode("Подготовка: Установка Xcode", 'Установите <a href="https://developer.apple.com/xcode/" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300">Xcode</a> из App Store. Это основной инструмент для разработки под iOS.'),
         commonSteps.ios.installCliTools("Подготовка: Установка Xcode Command Line Tools", "Теперь установите инструменты командной строки Xcode. Выполните в терминале:"),
         commonSteps.ios.installCocoaPods("Подготовка: Установка CocoaPods", "CocoaPods — это менеджер зависимостей для iOS проектов. Установите его командой:"),
-        commonSteps.buildApp("Шаг 2: Сборка веб-приложения", "Соберите ваше веб-приложение в статичные файлы. Эта команда создаст папку `dist`."),
-        commonSteps.installCore("Шаг 3: Установка Capacitor Core", "Добавьте ядро Capacitor в ваш проект."),
-        commonSteps.installCli("Шаг 4: Установка Capacitor CLI", "CLI (Command Line Interface) — это инструмент для управления проектами Capacitor."),
-        commonSteps.initCapacitor("Шаг 5: Инициализация Capacitor", "Эта команда создаст конфигурационный файл `capacitor.config.ts` и сразу укажет в нем папку со сборкой `dist`."),
-        commonSteps.android.installPlatform("Шаг 6: Установка Android-платформы", "Установите нативный пакет для Android."),
-        commonSteps.android.addPlatform("Шаг 7: Добавление платформы Android", "Создайте нативный проект Android в вашем приложении."),
-        commonSteps.ios.addPlatform("Шаг 6: Добавление платформы iOS", "Создайте нативный проект iOS в вашем приложении."),
-        commonSteps.syncWebCode("Шаг 8: Синхронизация веб-кода", "Скопируйте вашу веб-сборку (`dist`) в нативный проект. Эту команду нужно выполнять после каждого `npm run build`."),
-        commonSteps.syncWebCode("Шаг 7: Синхронизация веб-кода", "Скопируйте вашу веб-сборку (`dist`) в нативный проект. Эту команду нужно выполнять после каждого `npm run build`."),
-        commonSteps.android.openStudio("Шаг 9: Запуск из Android Studio", "Откройте нативный проект в Android Studio:", "Дождитесь синхронизации проекта. Затем вверху на панели инструментов выберите ваш эмулятор или устройство и нажмите <b>зеленую кнопку 'Run' (▶)</b>."),
-        commonSteps.ios.openXcode("Шаг 8: Запуск из Xcode", "Откройте нативный проект в Xcode:", "Вверху слева выберите ваш симулятор или подключенное устройство и нажмите <b>кнопку 'Run' (▶)</b>."),
-        commonSteps.android.buildApk("Шаг 10: Сборка APK-файла для публикации",
+        commonSteps.buildApp("Сборка веб-приложения", "Соберите ваше веб-приложение в статичные файлы. Эта команда создаст папку `dist`."),
+        commonSteps.installCore("Установка Capacitor Core", "Добавьте ядро Capacitor в ваш проект."),
+        commonSteps.installCli("Установка Capacitor CLI", "CLI (Command Line Interface) — это инструмент для управления проектами Capacitor."),
+        commonSteps.initCapacitor("Инициализация Capacitor", "Эта команда создаст конфигурационный файл `capacitor.config.ts` и сразу укажет в нем папку со сборкой `dist`."),
+        commonSteps.android.installPlatform("Установка Android-платформы", "Установите нативный пакет для Android."),
+        commonSteps.android.addPlatform("Добавление платформы Android", "Создайте нативный проект Android в вашем приложении."),
+        commonSteps.ios.addPlatform("Добавление платформы iOS", "Создайте нативный проект iOS в вашем приложении."),
+        commonSteps.android.syncWebCode("Синхронизация веб-кода", "Скопируйте вашу веб-сборку (`dist`) в нативный проект. Эту команду нужно выполнять после каждого `npm run build`."),
+        commonSteps.ios.syncWebCode("Синхронизация веб-кода", "Скопируйте вашу веб-сборку (`dist`) в нативный проект. Эту команду нужно выполнять после каждого `npm run build`."),
+        commonSteps.android.openStudio("Запуск из Android Studio", "Откройте нативный проект в Android Studio:", "Дождитесь синхронизации проекта. Затем вверху на панели инструментов выберите ваш эмулятор или устройство и нажмите <b>зеленую кнопку 'Run' (▶)</b>."),
+        commonSteps.ios.openXcode("Запуск из Xcode", "Откройте нативный проект в Xcode:", "Вверху слева выберите ваш симулятор или подключенное устройство и нажмите <b>кнопку 'Run' (▶)</b>."),
+        commonSteps.android.buildApk("Сборка APK-файла для публикации",
             'Когда приложение готово, можно собрать подписанный APK-файл для установки на устройства или загрузки в Google Play.',
             '1. В верхнем меню Android Studio выберите <b>Build &rarr; Generate Signed Bundle / APK...</b>.',
             '2. Выберите <b>APK</b> и нажмите <b>Next</b>.',
@@ -267,7 +276,7 @@ const ru = {
             '5. После создания (или выбора существующего) ключа, введите пароли, выберите `release` в качестве Build Variant и нажмите <b>Finish</b>.',
             'Готовый APK-файл будет находиться в папке `your-project/android/app/release/app-release.apk`.'
         ),
-        commonSteps.ios.archiveApp("Шаг 9: Архивирование и публикация",
+        commonSteps.ios.archiveApp("Архивирование и публикация",
             'Для публикации в App Store необходимо создать архив приложения.',
             '1. В Xcode убедитесь, что в качестве цели выбрано <b>Any iOS Device (arm64)</b>.',
             '2. В верхнем меню выберите <b>Product &rarr; Archive</b>.',
@@ -312,23 +321,23 @@ const ua = {
         copied: "Скопійовано!"
     },
     steps: [
-        commonSteps.prepareProject("Крок 1: Підготовка проєкту", "Цей посібник передбачає, що у вас є готовий веб-проєкт (наприклад, на React, Vue, Vite). Переконайтеся, що всі залежності встановлені, і проєкт готовий до збірки."),
+        commonSteps.prepareProject("Підготовка проєкту", "Цей посібник передбачає, що у вас є готовий веб-проєкт (наприклад, на React, Vue, Vite). Переконайтеся, що всі залежності встановлені, і проєкт готовий до збірки."),
         commonSteps.android.installStudio("Підготовка: Встановлення Android Studio", 'Вам знадобиться <a href="https://developer.android.com/studio" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300">Android Studio</a>. Вона встановить усі необхідні SDK, інструменти командного рядка та менеджер віртуальних пристроїв (емуляторів).'),
         commonSteps.ios.installXcode("Підготовка: Встановлення Xcode", 'Встановіть <a href="https://developer.apple.com/xcode/" target="_blank" rel="noopener noreferrer" class="text-sky-400 hover:text-sky-300">Xcode</a> з App Store. Це основний інструмент для розробки під iOS.'),
         commonSteps.ios.installCliTools("Підготовка: Встановлення Xcode Command Line Tools", "Тепер встановіть інструменти командного рядка Xcode. Виконайте в терміналі:"),
         commonSteps.ios.installCocoaPods("Підготовка: Встановлення CocoaPods", "CocoaPods — це менеджер залежностей для iOS-проєктів. Встановіть його командою:"),
-        commonSteps.buildApp("Крок 2: Збірка веб-додатку", "Зберіть ваш веб-додаток у статичні файли. Ця команда створить папку `dist`."),
-        commonSteps.installCore("Крок 3: Встановлення Capacitor Core", "Додайте ядро Capacitor у ваш проєкт."),
-        commonSteps.installCli("Крок 4: Встановлення Capacitor CLI", "CLI (Command Line Interface) — це інструмент для управління проєктами Capacitor."),
-        commonSteps.initCapacitor("Крок 5: Ініціалізація Capacitor", "Ця команда створить конфігураційний файл `capacitor.config.ts` і відразу вкаже в ньому папку зі збіркою `dist`."),
-        commonSteps.android.installPlatform("Крок 6: Встановлення Android-платформи", "Встановіть нативний пакет для Android."),
-        commonSteps.android.addPlatform("Крок 7: Додавання платформи Android", "Створіть нативний проєкт Android у вашому додатку."),
-        commonSteps.ios.addPlatform("Крок 6: Додавання платформи iOS", "Створіть нативний проєкт iOS у вашому додатку."),
-        commonSteps.syncWebCode("Крок 8: Синхронізація веб-коду", "Скопіюйте вашу веб-збірку (`dist`) в нативний проєкт. Цю команду потрібно виконувати після кожного `npm run build`."),
-        commonSteps.syncWebCode("Крок 7: Синхронізація веб-коду", "Скопіюйте вашу веб-збірку (`dist`) в нативний проєкт. Цю команду потрібно виконувати після кожного `npm run build`."),
-        commonSteps.android.openStudio("Крок 9: Запуск з Android Studio", "Відкрийте нативний проєкт в Android Studio:", "Дочекайтеся синхронізації проєкту. Потім вгорі на панелі інструментів виберіть ваш емулятор або пристрій і натисніть <b>зелену кнопку 'Run' (▶)</b>."),
-        commonSteps.ios.openXcode("Крок 8: Запуск з Xcode", "Відкрийте нативний проєкт у Xcode:", "Вгорі зліва виберіть ваш симулятор або підключений пристрій і натисніть <b>кнопку 'Run' (▶)</b>."),
-        commonSteps.android.buildApk("Крок 10: Збірка APK-файлу для публікації",
+        commonSteps.buildApp("Збірка веб-додатку", "Зберіть ваш веб-додаток у статичні файли. Ця команда створить папку `dist`."),
+        commonSteps.installCore("Встановлення Capacitor Core", "Додайте ядро Capacitor у ваш проєкт."),
+        commonSteps.installCli("Встановлення Capacitor CLI", "CLI (Command Line Interface) — це інструмент для управління проєктами Capacitor."),
+        commonSteps.initCapacitor("Ініціалізація Capacitor", "Ця команда створить конфігураційний файл `capacitor.config.ts` і відразу вкаже в ньому папку зі збіркою `dist`."),
+        commonSteps.android.installPlatform("Встановлення Android-платформи", "Встановіть нативний пакет для Android."),
+        commonSteps.android.addPlatform("Додавання платформи Android", "Створіть нативний проєкт Android у вашому додатку."),
+        commonSteps.ios.addPlatform("Додавання платформи iOS", "Створіть нативний проєкт iOS у вашому додатку."),
+        commonSteps.android.syncWebCode("Синхронізація веб-коду", "Скопіюйте вашу веб-збірку (`dist`) в нативний проєкт. Цю команду потрібно виконувати після кожного `npm run build`."),
+        commonSteps.ios.syncWebCode("Синхронізація веб-коду", "Скопіюйте вашу веб-збірку (`dist`) в нативний проєкт. Цю команду потрібно виконувати після кожного `npm run build`."),
+        commonSteps.android.openStudio("Запуск з Android Studio", "Відкрийте нативний проєкт в Android Studio:", "Дочекайтеся синхронізації проєкту. Потім вгорі на панелі інструментів виберіть ваш емулятор або пристрій і натисніть <b>зелену кнопку 'Run' (▶)</b>."),
+        commonSteps.ios.openXcode("Запуск з Xcode", "Відкрийте нативний проєкт у Xcode:", "Вгорі зліва виберіть ваш симулятор або підключений пристрій і натисніть <b>кнопку 'Run' (▶)</b>."),
+        commonSteps.android.buildApk("Збірка APK-файлу для публікації",
             'Коли додаток готовий, можна зібрати підписаний APK-файл для встановлення на пристрої або завантаження в Google Play.',
             '1. У верхньому меню Android Studio виберіть <b>Build &rarr; Generate Signed Bundle / APK...</b>.',
             '2. Виберіть <b>APK</b> і натисніть <b>Next</b>.',
@@ -337,7 +346,7 @@ const ua = {
             '5. Після створення (або вибору існуючого) ключа, введіть паролі, виберіть `release` як Build Variant і натисніть <b>Finish</b>.',
             'Готовий APK-файл буде знаходитися в папці `your-project/android/app/release/app-release.apk`.'
         ),
-        commonSteps.ios.archiveApp("Крок 9: Архівування та публікація",
+        commonSteps.ios.archiveApp("Архівування та публікація",
             'Для публікації в App Store необхідно створити архів додатку.',
             '1. У Xcode переконайтеся, що в якості цілі вибрано <b>Any iOS Device (arm64)</b>.',
             '2. У верхньому меню виберіть <b>Product &rarr; Archive</b>.',
